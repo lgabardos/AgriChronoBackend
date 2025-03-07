@@ -39,3 +39,4 @@ android/
 .env*
 deployment
 *.docker
+settings.json
