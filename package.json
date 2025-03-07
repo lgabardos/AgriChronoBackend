@@ -1,0 +1,27 @@
+{
+  "name": "heure-champs-back",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --outDir dist && npx tsx --watch src/index.ts",
+    "start": "npx tsx index.ts",
+    "dockerbuild": "esbuild ./index.ts --bundle --loader:.node=file --external:sharp --platform=node --outfile=dist/index.js && pkg -t node18-alpine dist/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "esbuild": "^0.25.0",
+    "express": "^4.21.2",
+    "pkg": "^5.8.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}
