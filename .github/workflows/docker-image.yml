@@ -18,11 +18,12 @@ jobs:
       run: docker build . --file Dockerfile --tag agrichrono-back:$(date +%s)
     - name: Download built image
       run: docker image save agrichrono-back -o agrichrono-back.docker
-    - name: Cache
-      uses: actions/cache@v4.2.3
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.6.2
       with:
-        # A list of files, directories, and wildcard patterns to cache and restore
+        # Artifact name
+        name: agrichrono-back.docker
+        # A file, directory or wildcard pattern that describes what to upload
         path: agrichrono-back.docker
-        # An explicit key for restoring and saving the cache
-        key: agrichrono-back
+        # The desired behavior if no files are found using
               
