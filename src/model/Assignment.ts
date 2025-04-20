@@ -9,9 +9,10 @@ export default class Assignment {
     public date: Date,
     public type: AssignmentType,
     public time: number,
+    public comment: string,
     public plot?: Plot,
     public task?: Task,
-    public value?: number,
+    public value?: number
   ) {}
 }
 
