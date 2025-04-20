@@ -28,7 +28,7 @@ export default class SettingController {
       const task = setting.tasks.find((t) => t.id === assignment.task?.id);
       if (!plot || !task) {
         unlock();
-        throw "Incorrect values"
+        throw "Incorrect values";
       }
       assignment.time = task.speed * plot.area;
     }
@@ -53,8 +53,10 @@ export default class SettingController {
     if (!setting.assignments) {
       setting.assignments = [];
     }
-    setting.assignments = setting.assignments.filter((a) => a.id !== assignmentId);
+    setting.assignments = setting.assignments.filter(
+      (a) => a.id !== assignmentId
+    );
     fs.writeFileSync("./settings.json", JSON.stringify(setting));
     unlock();
-}
+  }
 }
