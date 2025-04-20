@@ -22,17 +22,6 @@ export default class SettingController {
     }
     assignment.id = setting.assignments.length + 1;
 
-    if (assignment.type === "CULTURE") {
-      // calculate the value
-      const plot = setting.plots.find((p) => p.id === assignment.plot?.id);
-      const task = setting.tasks.find((t) => t.id === assignment.task?.id);
-      if (!plot || !task) {
-        unlock();
-        throw "Incorrect values";
-      }
-      assignment.time = task.speed * plot.area;
-    }
-
     setting.assignments.push(assignment);
     fs.writeFileSync("./settings.json", JSON.stringify(setting));
     unlock();

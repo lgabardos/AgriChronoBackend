@@ -21,4 +21,5 @@ export enum AssignmentType {
   METHA = "METHA",
   OTHER = "OTHER",
   SLURRY = "SLURRY",
+  DIGESTATE = "DIGESTATE",
 }
