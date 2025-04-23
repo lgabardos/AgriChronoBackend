@@ -33,10 +33,11 @@ import Constants from "./util/Constants.js";
     callback: (err: Error | null, allow?: boolean) => void
   ) => {
     if (
-      origin?.startsWith("http://localhost") ||
-      origin?.startsWith("https://localhost") ||
-      origin?.startsWith("capacitor://localhost") ||
-      origin?.startsWith(Constants.API_URL)
+      origin === undefined ||
+      origin.startsWith("http://localhost") ||
+      origin.startsWith("https://localhost") ||
+      origin.startsWith("capacitor://localhost") ||
+      origin.startsWith(Constants.API_URL)
     ) {
       callback(null, true);
     } else {
@@ -47,7 +48,7 @@ import Constants from "./util/Constants.js";
   app.use(
     cors({
       origin: customOrigin,
-      exposedHeaders: ["XSRF-TOKEN", "x-access-token"],
+      exposedHeaders: [Constants.XSRF_TOKEN, "x-access-token"],
       credentials: true,
     })
   );
