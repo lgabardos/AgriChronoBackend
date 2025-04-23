@@ -38,9 +38,12 @@ Depending on your machine where you will deploy this container
 
 ### Docker run
 ```sh
-docker run -d -p 8500:8500 -e ADMIN_SECRET=1234 -e API_URL="https://api.example.com" \
+docker run -d -p 8500:8500 \
+ -e ADMIN_SECRET=1234 \
+ -e API_URL="https://example.com" \
+ -e CIPHER_KEY="abcdef1234567890" \
  -v ./settings.json:/app/settings.json \
- -v /path/tp/fullchain.pem:/certs/server.pem \
+ -v /path/to/fullchain.pem:/certs/server.pem \
  -v /path/to/key.pem:/certs/server.key \
- --name agrichrono-back  agrichrono-back:latest
+ --name agrichrono-back agrichrono-back:latest
 ```

@@ -35,6 +35,7 @@ import Constants from "./util/Constants.js";
     if (
       origin?.startsWith("http://localhost") ||
       origin?.startsWith("https://localhost") ||
+      origin?.startsWith("capacitor://localhost") ||
       origin?.startsWith(Constants.API_URL)
     ) {
       callback(null, true);
