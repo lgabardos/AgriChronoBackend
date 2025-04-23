@@ -10,6 +10,8 @@ export default class Constants {
   static readonly ADMIN_SECRET = process.env.ADMIN_SECRET ?? "";
   static readonly API_URL = process.env.API_URL ?? "";
 
+  static readonly XSRF_TOKEN = "XSRF-TOKEN";
+
   static {
     if (Constants.CIPHER_KEY === "") {
       console.error(
