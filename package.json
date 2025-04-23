@@ -1,6 +1,6 @@
 {
-  "name": "heure-champs-back",
-  "version": "1.0.0",
+  "name": "agri-chrono-back",
+  "version": "1.1.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
