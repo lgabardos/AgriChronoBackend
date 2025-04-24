@@ -24,19 +24,22 @@ npm run build
 
 ### Docker build
 
-On a AMD64 machine, you can simply run 
+On a AMD64 machine, you can simply run
+
 ```sh
 docker build . -t agrichrono-back
 ```
 
-If you're using an ARM machine, may be best to run 
-```sh 
+If you're using an ARM machine, may be best to run
+
+```sh
 docker buildx build --platform linux/amd64 . -t agrichrono-back
 ```
 
 Depending on your machine where you will deploy this container
 
-### Docker run
+### Docker run test
+
 ```sh
 docker run -d -p 8500:8500 \
  -e ADMIN_SECRET=1234 \
