@@ -38,7 +38,7 @@ docker buildx build --platform linux/amd64 . -t agrichrono-back
 
 Depending on your machine where you will deploy this container
 
-### Docker run test
+### Docker run
 
 ```sh
 docker run -d -p 8500:8500 \
