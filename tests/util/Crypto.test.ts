@@ -1,20 +1,20 @@
-import { expect, test } from "vitest";
-import Crypto from "../../src/util/Crypto.js";
+import { expect, test } from 'vitest';
+import Crypto from '../../src/util/Crypto.js';
 
-test("cipher / decipher", () => {
-  const ciphered = Crypto.cipher("test");
+test('cipher / decipher', () => {
+  const ciphered = Crypto.cipher('test');
   expect(ciphered).not.toBeNull();
-  expect(ciphered).not.toBe("");
+  expect(ciphered).not.toBe('');
   const deciphered = Crypto.decipher(ciphered);
-  expect(deciphered).toBe("test");
+  expect(deciphered).toBe('test');
 });
 
-test("md5", () => {
-  const md5 = Crypto.md5("test");
-  expect(md5).toBe("098f6bcd4621d373cade4e832627b4f6");
+test('md5', () => {
+  const md5 = Crypto.md5('test');
+  expect(md5).toBe('098f6bcd4621d373cade4e832627b4f6');
 });
 
-test("validateXsrf", () => {
+test('validateXsrf', () => {
   const date = new Date().getTime();
   const cipher = Crypto.cipher({ date });
   expect(Crypto.validXSRF(cipher)).toBeTruthy();
@@ -25,7 +25,7 @@ test("validateXsrf", () => {
   expect(Crypto.validXSRF(oldCipher)).toBeFalsy();
 });
 
-test("validateToken", () => {
+test('validateToken', () => {
   const date = new Date().getTime();
   const cipher = Crypto.cipher({ date, admin: true });
   expect(Crypto.validToken(cipher)).toBeTruthy();
