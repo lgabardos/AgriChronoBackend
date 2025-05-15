@@ -2,28 +2,38 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag agrichrono-back:$(date +%s)
-    - name: Download built image
-      run: docker image save agrichrono-back -o agrichrono-back.docker
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v4.6.2
-      with:
-        # Artifact name
-        name: agrichrono-back.docker
-        # A file, directory or wildcard pattern that describes what to upload
-        path: agrichrono-back.docker
-        # The desired behavior if no files are found using
-              
+      - uses: actions/checkout@v4
+      - name: Npm install
+        run: npm install
+      - name: Build to check errors
+        run: npm run build
+      - name: Run unit tests
+        run: npm run test:coverage
+      - name: Coverage check
+        uses: devmasx/coverage-check-action@v1.2.0
+        with:
+          type: lcov
+          token: ${{ github.token }}
+          min_coverage: 90
+          result_path: coverage/lcov.info
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag agrichrono-back:$(date +%s)
+      - name: Download built image
+        run: docker image save agrichrono-back -o agrichrono-back.docker
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          # Artifact name
+          name: agrichrono-back.docker
+          # A file, directory or wildcard pattern that describes what to upload
+          path: agrichrono-back.docker
+          # The desired behavior if no files are found using
