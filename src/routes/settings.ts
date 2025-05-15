@@ -57,7 +57,7 @@ router.delete(
       res.status(401).type('json').send({ message: 'Token is invalid' });
       return;
     }
-    const assignmentId = parseInt(req.params.id ?? '0');
+    const assignmentId = parseInt(req.params.id!);
     await SettingController.removeAssignment(assignmentId);
     res.status(200).send();
   })

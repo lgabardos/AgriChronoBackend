@@ -3,12 +3,14 @@ import express, { Express } from 'express';
 import auth from '../../src/routes/auth.js';
 import supertest from 'supertest';
 import Crypto from '../../src/util/Crypto.js';
+import cookieParser from 'cookie-parser';
 
 let app: Express;
 
 beforeEach(() => {
   app = express();
   app.use(express.json({ limit: '256mb' }));
+  app.use(cookieParser());
   app.use(auth);
 });
 
@@ -63,6 +65,12 @@ test('POST code', async () => {
   const xsrfResponse = await supertest(app).get('/xsrf');
   const xsrf = xsrfResponse.body.token;
   response = await supertest(app).post('/code').set('xsrf-token', xsrf).send({ code: '1111' });
+  expect(response.statusCode).toBe(401);
+  // valid xsrf with cookie
+  response = await supertest(app)
+    .post('/code')
+    .set('Cookie', [`XSRF-TOKEN=${xsrf}`])
+    .send({ code: '1111' });
   expect(response.statusCode).toBe(401);
   // all good
   response = await supertest(app).post('/code').set('xsrf-token', xsrf).send({ code: '1234' });
