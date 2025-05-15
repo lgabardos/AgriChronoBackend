@@ -7,13 +7,14 @@ on:
     branches: ['main']
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       - name: Npm install
         run: npm install
+      - name: Create env file
+        run: echo 'CIPHER_KEY=1234\nADMIN_SECRET=1234\nAPI_URL=http://localhost' > .env
       - name: Run unit tests
         run: npm run test:coverage
       - name: Coverage check
@@ -23,6 +24,14 @@ jobs:
           token: ${{ github.token }}
           min_coverage: 90
           result_path: coverage/lcov.info
+      - name: Delete fake env file
+        run: rm .env
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag agrichrono-back:$(date +%s)
       - name: Download built image
