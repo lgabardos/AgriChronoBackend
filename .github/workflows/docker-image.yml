@@ -14,7 +14,10 @@ jobs:
       - name: Npm install
         run: npm install
       - name: Create env file
-        run: echo 'CIPHER_KEY=1234\nADMIN_SECRET=1234\nAPI_URL=http://localhost' > .env
+        run: \
+          echo 'CIPHER_KEY=1234' > .env
+          echo 'ADMIN_SECRET=1234' >>  .env
+          echo 'API_URL=http://localhost' >> .env
       - name: Run unit tests
         run: npm run test:coverage
       - name: Coverage check
